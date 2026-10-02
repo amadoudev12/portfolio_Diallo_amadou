@@ -70,8 +70,8 @@ export const projects: readonly Project[] = [
     screenshot: {
         src: "/projects/noteflow.png",
         alt: "Tableau de bord de NoteFlow",
-        width: 1440,
-        height: 900,
+        width: 1906,
+        height: 924,
     },
   },
   {
@@ -104,8 +104,8 @@ export const projects: readonly Project[] = [
     screenshot:{
         src: "/projects/rayon.png",
         alt: "Tableau de bord de Rayon",
-        width: 1440,
-        height: 900,
+        width: 1920,
+        height: 909,
     },
   },
 ];
