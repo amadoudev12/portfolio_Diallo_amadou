@@ -1,26 +1,106 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@theme {
+  /* Surfaces claires */
+  --color-paper: #fafafa;
+  --color-ink: #0a0a0a;
+  --color-muted: #5c5c5c;
+  --color-line: #e2e2e2;
+
+  /* Surfaces sombres (couvertures de projets, contact, pied de page) */
+  --color-night-muted: #a3a3a3;
+  --color-night-line: #2a2a2a;
+
+  /* Accent : une seule couleur, utilisée avec parcimonie */
+  --color-accent: #c8410b;
+  --color-accent-bright: #ff6b2c;
+
+  --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --animate-rise: rise 0.7s var(--ease-out-expo) both;
+  --animate-travel: travel 1.8s ease-in-out infinite;
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes travel {
+    0% {
+      top: 0;
+      opacity: 0;
+    }
+    15%,
+    85% {
+      opacity: 1;
+    }
+    100% {
+      top: 100%;
+      opacity: 0;
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Quadrillage fin : couleur et pas réglables via --grid-color / --grid-size. */
+@utility bg-grid {
+  background-image:
+    linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+  background-size: var(--grid-size, 56px) var(--grid-size, 56px);
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+    /* Compense la barre de navigation fixe lors des ancres. */
+    scroll-padding-top: 4rem;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  /* Mouvement réduit : les apparitions au défilement se limitent à un fondu. */
+  @media (prefers-reduced-motion: reduce) {
+    [data-reveal] {
+      transform: none !important;
+    }
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+  }
+
+  ::selection {
+    background-color: var(--color-ink);
+    color: var(--color-paper);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--focus-ring, var(--color-accent));
+    outline-offset: 3px;
+  }
+
+  [data-surface="dark"] {
+    --focus-ring: var(--color-accent-bright);
+  }
+
+  [data-surface="dark"] ::selection {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+  }
 }
