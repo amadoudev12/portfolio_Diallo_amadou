@@ -100,7 +100,7 @@ export const projects: readonly Project[] = [
       { name: "Prisma", role: "ORM et accès aux données" },
       { name: "NextAuth", role: "Authentification" },
     ],
-    links: { live: "https://rayon-two.vercel.app/login", repository: "https://github.com/amadoudev12/rayon" },
+    links: { live: "https://rayon-two.vercel.app", repository: "https://github.com/amadoudev12/rayon" },
     screenshot:{
         src: "/projects/rayon.png",
         alt: "Tableau de bord de Rayon",
